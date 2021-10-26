@@ -1,0 +1,6 @@
+{
+  "name": "Simple Todos",
+  "source": "todos",
+  "type": "app",
+  "buildDirectory": "./out"
+}
