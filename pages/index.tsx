@@ -5,7 +5,7 @@ import Agent from "../lib/agent";
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 
-const todosAgent = new Agent("todos");
+const todosAgent = new Agent("@test/todos");
 
 export default function Home() {
   const router = useRouter();

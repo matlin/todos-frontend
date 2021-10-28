@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import Agent from "../lib/agent";
 
-const todosAgent = new Agent("todos");
+const todosAgent = new Agent("@test/todos");
 
 export default function List() {
   const router = useRouter();
@@ -14,7 +14,7 @@ export default function List() {
 
   const [todos, setTodos] = useState([]);
 
-  const listId = router.query.listId as string;
+  const listId = (router.query.listId as string | undefined) ?? "";
 
   const getTodos = useCallback(async () => {
     console.log("getting todos");

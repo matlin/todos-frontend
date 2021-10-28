@@ -1,7 +1,12 @@
 const BASE_PATH_AGENT_API = "/_api";
 
 export default class Agent {
-  constructor(readonly agentId: string) {}
+  readonly authorName: string;
+  readonly agentName: string;
+
+  constructor(readonly packageName: string) {
+    [this.authorName, this.agentName] = packageName.replace("@", "").split("/");
+  }
 
   async getView(name: string, params: Record<string, any>) {
     const urlQueryParams = Object.keys(params)
@@ -11,7 +16,7 @@ export default class Agent {
       .join("&");
 
     const resp = await fetch(
-      `${BASE_PATH_AGENT_API}/${this.agentId}/${name}?${urlQueryParams}`
+      `${BASE_PATH_AGENT_API}/${this.authorName}/${this.agentName}/${name}?${urlQueryParams}`
     );
     try {
       const data = await resp.json();
@@ -22,14 +27,17 @@ export default class Agent {
   }
 
   async runAction(name: string, params: any) {
-    const resp = await fetch(`${BASE_PATH_AGENT_API}/${this.agentId}/${name}`, {
-      credentials: "include",
-      method: "POST",
-      body: JSON.stringify(params),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    const resp = await fetch(
+      `${BASE_PATH_AGENT_API}/${this.authorName}/${this.agentName}/${name}`,
+      {
+        credentials: "include",
+        method: "POST",
+        body: JSON.stringify(params),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
     try {
       const data = await resp.json();
       return data;
