@@ -1,9 +1,9 @@
 {
-  "name": "Simple Todos",
-  "source": "todos",
+  "title": "Simple Todos",
+  "name": "todos",
   "type": "app",
-  "buildDirectory": "./out",
+  "pathToDeploy": "./out",
   "agentDependencies": {
-    "@test/todos": "required"
+    "@matt/todos": "required"
   }
 }
